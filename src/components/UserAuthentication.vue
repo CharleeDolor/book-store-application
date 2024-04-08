@@ -1,7 +1,7 @@
 <template>
     <div>
       <h1>User Login</h1>
-      <div v-if="!isAuthenticated">
+      <!-- <div v-if="!isAuthenticated">
         <form @submit.prevent="login">
           <input type="text" v-model="credentials.username" placeholder="Username" />
           <input type="password" v-model="credentials.password" placeholder="Password" />
@@ -12,6 +12,14 @@
       <div v-else>
         <p>Welcome back, user!</p>
         <button @click="logout">Logout</button>
+      </div> -->
+      <div>
+        <form @submit.prevent="login">
+          <input type="text" v-model="credentials.username" placeholder="Username" />
+          <input type="password" v-model="credentials.password" placeholder="Password" />
+          <button type="submit">Login</button>
+        </form>
+        <p v-if="error">{{ error }}</p>
       </div>
     </div>
   </template>
@@ -34,6 +42,9 @@
         this.$store.dispatch('simulateAuthentication', this.credentials)
           .then(() => {
             this.isAuthenticated = true;
+
+            // push "/user" path to router
+            this.$router.push({ path: '/user'});
           })
           .catch(error => {
             this.error = error; // Display error message

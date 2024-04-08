@@ -7,10 +7,14 @@ const routes = [{
         component: HomeView
     },
     {
-        path: '/about',
-        name: 'about',
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/AboutView.vue')
+        path: '/user',
+        name: 'user',
+        component: () => import ('../views/BooksListView.vue')
+    },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () => import ('../components/ShoppingCart.vue')
     }
 ]
 
