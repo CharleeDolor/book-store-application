@@ -46,7 +46,6 @@ export default {
 
     addToCart(book){
       this.$store.dispatch('asyncAddBook', book);
-      alert(book.name + " successfully added to cart");
     },
 
     searchBook(val){

@@ -55,11 +55,58 @@ export default createStore({
     },
     mutations: {
         addToCart: (state, book) => {
-            // push the book in the cart
-            state.cart.push(book);
-
             let quantity = prompt("How many copies for " + book.name + "?");
-            state.cart[state.cart.length-1].quantity = quantity;
+
+            // check if quantity is invalid (quantity is greater than stockQuantity)
+            let isInvalidQuantity = false;
+            for(let i = 0; i < state.books.length; i++){
+                if(quantity > state.books[i].stockQuantity){
+                    
+                    isInvalidQuantity = true;
+                    break;
+                }
+            }
+
+            // check if quantity is invalid upon checking
+            if(isInvalidQuantity){
+                alert("Insufficient stocks for " + book.name);
+                return;
+            }
+
+            if(state.cart.length == 0){
+                // push the book in the cart
+                state.cart.push(book);
+
+                //get the first item and create a new array key quantity with value quantity 
+                state.cart[0].quantity = quantity;
+                alert(book.name + " successfully added to cart");
+                return;
+            }
+
+            // check if book is already in cart
+            let isExist = false
+            // loop through cart array and find if book exist in cart
+            for(let i = 0; i < state.cart.length; i++){
+                if(state.cart[i].name == book.name){
+                    isExist = true;
+                    // change the value of current cart item by adding the quantity
+                    state.cart[i].quantity = parseInt(state.cart[i].quantity) + parseInt(quantity);
+                    break;
+                }
+            }
+
+            // check if item does not exist in cart
+            if(!isExist){
+                // push the book in the cart
+                state.cart.push(book);
+                //get the latest cart item and create a new array key quantity with value quantity 
+                state.cart[state.cart.length-1].quantity = quantity;
+                alert(book.name + " successfully added to cart");
+                return;
+            } else {
+                // this means that book is already in cart and already added quantity to the cart
+                alert(book.name + " successfully added to cart");
+            }
         },
 
         // mutations with optional parameter removing all or an item
@@ -73,11 +120,13 @@ export default createStore({
                     for(let j = 0; j < state.books.length; j++){
                         // check if current cart item name is equals to current book name
                         if(state.cart[i].name == state.books[j].name){
-                            // check if their quantity is equal
-                            if(state.cart[i].quantity == state.books[j].stockQuantity){
-                                // remove current book from books
-                                state.books.splice(j, 1);
-                            }
+                            // change the value of stock quantity of the purchased book
+                            state.books[j].stockQuantity = parseInt(state.books[j].stockQuantity) - parseInt(state.cart[i].quantity);
+                            // // check if their quantity is equal
+                            // if(state.cart[i].quantity == state.books[j].stockQuantity){
+                            //     // remove current book from books
+                            //     state.books.splice(j, 1);
+                            // }
                         }
                     }
                 }
@@ -110,7 +159,7 @@ export default createStore({
                     commit('removeFromCart')
 
                     // exclude books that have no quantity left
-                    state.books = state.books.filter(book => book.quantity != 0);
+                    state.books = state.books.filter(book => book.stockQuantity != 0);
                     
                     resolve('Purchase successful')
                 }, 1000)
