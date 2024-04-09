@@ -17,7 +17,7 @@
         <td>{{ book.name }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.price }}</td>
-        <td>{{ book.quantity }}</td>
+        <td>{{ book.stockQuantity }}</td>
       </tr>
     </table>
   </div>
