@@ -4,7 +4,7 @@ export default createStore({
     name: 'store',
     state: {
         books: [
-            { name: 'The Great Gatsby', author: 'F. Scott Fitzgerald', price: 12.99, stockQuantity: 10},
+            { name: 'The Great Gatsby', author: 'F. Scott Fitzgerald', price: 12.99, stockQuantity: 10 },
             { name: 'Tender is the Night', author: 'F. Scott Fitzgerald', price: 10.99, stockQuantity: 10 },
 
             { name: 'Harry Potter and the Philosopher\'s Stone', author: 'J.K. Rowling', price: 15.99, stockQuantity: 10 },
@@ -56,6 +56,15 @@ export default createStore({
     mutations: {
         addToCart: (state, book) => {
             let quantity = prompt("How many copies for " + book.name + "?");
+
+            if(!quantity){
+                return;
+            }
+
+            if(isNaN(quantity)){
+                alert("Invalid quantity, Try again");
+                return;
+            }
 
             // check if quantity is invalid (quantity is greater than stockQuantity)
             let isInvalidQuantity = false;
