@@ -2,105 +2,261 @@
 /* color palette from <https://github.com/vuejs/theme> */
 
 :root {
-    --vt-c-white: #ffffff;
-    --vt-c-white-soft: #f8f8f8;
-    --vt-c-white-mute: #f2f2f2;
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+
+  --gradient-color-1: #3f90fc; /* Blue */
+  --gradient-color-2: #8fd3f4; /* Light Blue */
+  --gradient-color-3: #b7f8db; /* Green */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
   
-    --gradient-color-1: #3f90fc; /* Blue */
-    --gradient-color-2: #8fd3f4; /* Light Blue */
-    --gradient-color-3: #b7f8db; /* Green */
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+  overflow: auto;
+}
+
+.container {
+  width: 20rem;
+  margin: 1rem;
+  padding: 6vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+}
+  
+.container h2 {
+  font-size: 3vh;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4.8vh;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.container form input {
+  width: 16rem;
+  outline: none;
+  padding: 5px 10px;
+  margin-bottom: 1rem;
+  border: 1px solid rgb(133, 129, 129);
+}
+
+.login-form button {
+  border: none;
+  color: #fff;
+  margin: 1rem 0;
+  font-size: 18px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5rem;
+  background: #0F9EDE;
+}
+
+/* Table Design */
+
+table{
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding: 10px;
+  width: 100vh;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:20px;
+  font-weight: bold;
+  padding:24px;
+  text-align:center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+ 
+tr:nth-child(odd):hover td {
+  background:#4E5066;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+
+/* Buttons */
+button{
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+button:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.control-panel {
+  text-align: right;
+}
+
+.control-panel input{
+  height: 2.5rem;
+}
+
+.mycart-btn:hover, .shop-btn:hover {
+  background-color: #f3e300;
+}
+
+.shop-btn {
+  margin: 1rem;
+}
+
+.logout-btn {
+  margin: 1rem;
+}
+
+h3 {
+  margin: 1rem;
+}
+
+p {
+  font-weight: bold;
+  margin: 1rem;
+}
+.login-btn:hover, .search-btn:hover, .purchaseItem-btn:hover {
+  background-color: #5edfff;
+}
+.logout-btn:hover {
+  background-color: #ff0000;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
   }
-  
+}
+
+@media (min-width: 1024px) {
   body {
-    min-height: 100vh;
-    color: var(--vt-c-text-light-1);
-    background: linear-gradient(to bottom right, var(--vt-c-white), var(--gradient-color-1), var(--gradient-color-2), var(--gradient-color-3));
-    transition:
-      color 0.5s,
-      background-color 0.5s;
-    line-height: 1.6;
-    font-family:
-      Inter,
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      'Fira Sans',
-      'Droid Sans',
-      'Helvetica Neue',
-      sans-serif;
-    font-size: 15px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* styles */
-  .welcome-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-  }
-  
-  .login-container {
-    width: 1300px;
   }
 
+    #app {
+    display: grid;
   
-  .top-heading {
-    margin-bottom: 20px;
   }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .login-form input,
-  .login-form button {
-    margin-bottom: 10px;
-
-  }
-  button {
-    border-radius: 20px; 
-    
-  }
-  
-  .mycart-btn:hover, .shop-btn:hover {
-    background-color: #f3e300;
-  }
-  .login-btn:hover, .search-btn:hover, .purchaseItem-btn:hover {
-    background-color: #5edfff;
-  }
-  .logout-btn:hover {
-    background-color: #ff0000;
-  }
-  
-  @media (hover: hover) {
-    a:hover {
-      background-color: hsla(160, 100%, 37%, 0.2);
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    body {
-      display: flex;
-    }
-  
-     #app {
-      display: grid;
-    
-    }
-  }
+}

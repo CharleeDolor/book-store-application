@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>My Cart</h1>
-    <button @click="gotoBookList">Shop</button>
+    <button @click="gotoBookList" class="shop-btn">Shop</button>
 
     <div v-if="booksInCart.length > 0">
       <table class="center-table"> <!-- Added class for centering -->
