@@ -94,12 +94,18 @@ export default createStore({
 
             // check if book is already in cart
             let isExist = false
+            let isQuantityInvalid = false;
             // loop through cart array and find if book exist in cart
             for(let i = 0; i < state.cart.length; i++){
                 if(state.cart[i].name == book.name){
                     isExist = true;
-                    // change the value of current cart item by adding the quantity
-                    state.cart[i].quantity = parseInt(state.cart[i].quantity) + parseInt(quantity);
+                    if(parseInt(state.cart[i].quantity) + parseInt(quantity) > book.stockQuantity){
+                        isQuantityInvalid = true;
+                    } else {
+                        // change the value of current cart item by adding the quantity
+                        state.cart[i].quantity = parseInt(state.cart[i].quantity) + parseInt(quantity);
+                    }
+                    
                     break;
                 }
             }
@@ -113,6 +119,10 @@ export default createStore({
                 alert(book.name + " successfully added to cart");
                 return;
             } else {
+                if(isQuantityInvalid){
+                    alert("Invalid to add more on "+ book.name + ". Please check your cart.");
+                    return;
+                }
                 // this means that book is already in cart and already added quantity to the cart
                 alert(book.name + " successfully added to cart");
             }

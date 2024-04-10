@@ -4,26 +4,25 @@
     <button @click="gotoBookList">Shop</button>
 
     <div v-if="booksInCart.length > 0">
-      <div class="control-panel">
-      <input 
-        type="checkbox" 
-        v-model="isManage" 
-        @click="activateManageItems()"
-      >
-      <p>Edit Cart</p>
-      </div>
       <table class="center-table"> <!-- Added class for centering -->
       <tr>
         <th>Name</th>
         <th>Author</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Action</th>
       </tr>
       <tr v-for="(book, index) in booksInCart" :key="index" class="item" @click="removeItem(index, book)">
         <td>{{ book.name }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.price }}</td>
-        <td>{{ book.quantity }}</td>
+        <td class="td-quantity" v-on:click.stop="">
+          <button @click="addQuantity(book)"> + </button>
+          {{ book.quantity }}
+          <button @click="reduceQuantity(book)"> - </button>
+        </td>
+
+        <td v-on:click.stop=""><button @click="removeItem(index, book)">Remove</button></td>
       </tr>
     </table>
     <p>Total Price: {{ this.$store.getters.cartTotalPrice }}</p>
@@ -42,6 +41,7 @@ export default {
       this.$router.push({path: '/forbidden'});
     }
   },
+  
   data(){
     return {
       isManage: false
@@ -56,11 +56,13 @@ export default {
 
   methods:{
     removeItem(index, book){
-      if(this.isManage){
-        let conf = confirm("Are you sure to remove "+ book.name +" from the cart?");
-        if(conf){
-          this.$store.dispatch('asyncRemoveBook', index);
-        }
+      let conf = confirm("Are you sure to remove "+ book.name +" from the cart?");
+      if(conf){
+        alert(book.name, " with the quantity of ", book.quantity, " is deleted.");
+        this.$store.dispatch('asyncRemoveBook', index);
+        
+      } else {
+        alert("Deletion cancelled");
       }
     },
     activateManageItems(){
@@ -69,6 +71,22 @@ export default {
 
     gotoBookList(){
       this.$router.push({ path: '/user'});
+    },
+
+    addQuantity(book){
+      if(parseInt(book.quantity) === parseInt(book.stockQuantity)){
+        alert("Cannot add anymore");
+        return;
+      }
+      book.quantity = parseInt(book.quantity) + 1;
+    },
+
+    reduceQuantity(book){
+      if(parseInt(book.quantity) === 1){
+        alert("Cannot reduce quantity anymore");
+        return;
+      }
+      book.quantity = parseInt(book.quantity) - 1;
     },
 
     purchaseItems(){
@@ -115,6 +133,13 @@ tr.item:hover{
   justify-content: center;
   align-items: center;
   gap: 0.5;
+}
+
+.td-quantity{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 </style>

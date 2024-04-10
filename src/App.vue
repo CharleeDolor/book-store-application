@@ -7,7 +7,10 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  
+}
+button{
+  cursor: pointer;
+  padding: 0.5rem;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
