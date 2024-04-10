@@ -1,12 +1,10 @@
 <template>
   <div>
-    <p>Welcome back, user!</p>
-    <button @click="logout">Logout</button>
+    <h3><b>Welcome back, user!</b></h3>
+    <button @click="logout" class="logout-btn">Logout</button>
     <BookList></BookList>
   </div>
-
   <div>
-
   </div>
 </template>
 

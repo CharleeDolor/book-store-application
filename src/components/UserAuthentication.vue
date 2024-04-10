@@ -1,6 +1,7 @@
 <template>
-    <div>
-      <h1>User Login</h1>
+  <div class="container">
+    <h1 class="top-heading">User Login</h1>
+    <div class="login-container">
       <!-- <div v-if="!isAuthenticated">
         <form @submit.prevent="login">
           <input type="text" v-model="credentials.username" placeholder="Username" />
@@ -13,16 +14,18 @@
         <p>Welcome back, user!</p>
         <button @click="logout">Logout</button>
       </div> -->
-      <div>
-        <form @submit.prevent="login">
-          <input type="text" v-model="credentials.username" placeholder="Username" />
-          <input type="password" v-model="credentials.password" placeholder="Password" />
-          <button type="submit">Login</button>
-        </form>
-        <p v-if="error">{{ error }}</p>
-      </div>
+   
+    <div class="category">
+      <form @submit.prevent="login" class="login-form">
+        <input type="text" v-model="credentials.username" placeholder="Username" />
+        <input type="password" v-model="credentials.password" placeholder="Password" />
+        <button type="submit" class="login-btn"> Login</button>
+      </form>
+      <p v-if="error">{{ error }}</p>
     </div>
-  </template>
+  </div>
+</div>
+</template>
   
   <script>
   export default {
@@ -61,4 +64,5 @@
   };
   </script>
 
-  <style scoped></style>
+  
+<style scoped></style>

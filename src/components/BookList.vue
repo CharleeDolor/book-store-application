@@ -1,9 +1,9 @@
 <template>
    <div>
-    <button @click="gotoMyCart"> My cart</button>
+    <button @click="gotoMyCart" class="mycart-btn"> My cart</button>
 
     <div class="control-panel">
-      <input type="text" v-model="searchKey"><button @click="searchBook(this.searchKey)">Search</button>
+      <input type="text" v-model="searchKey"><button @click="searchBook(this.searchKey)" class="search-btn">Search</button>
     </div>
 
     <table>

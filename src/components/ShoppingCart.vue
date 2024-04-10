@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>My Cart</h1>
-    <button @click="gotoBookList">Shop</button>
+    <button @click="gotoBookList" class="shop-btn">Shop</button>
     <div class="control-panel">
       <input 
         type="checkbox" 
@@ -27,7 +27,7 @@
       </tr>
     </table>
     <p>Total Price: {{ this.$store.getters.cartTotalPrice }}</p>
-    <button @click="purchaseItems()">Purchase Items in Cart</button>
+    <button @click="purchaseItems()" class="purchaseItem-btn">Purchase Items in Cart</button>
   </div>
 </template>
 
