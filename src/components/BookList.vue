@@ -1,19 +1,19 @@
 <template>
-   <div>
-    <button @click="gotoMyCart" class="mycart-btn"> My cart</button>
+  <div>
+    <button @click="gotoMyCart"> My cart</button>
 
     <div class="control-panel">
-      <input type="text" v-model="searchKey"><button @click="searchBook(this.searchKey)" class="search-btn">Search</button>
+      <input type="text" v-model="searchKey"><button @click="searchBook(searchKey)">Search</button>
     </div>
 
-    <table>
+    <table class="center-table">
       <tr>
         <th>Name</th>
         <th>Author</th>
         <th>Price</th>
         <th>Available Copies</th>
       </tr>
-      <tr v-for="book in this.searchedItems" :key="book.name" class="item" @click="addToCart(book)">
+      <tr v-for="book in searchedItems" :key="book.name" class="item" @click="addToCart(book)">
         <td>{{ book.name }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.price }}</td>
@@ -26,6 +26,13 @@
 <script>
 export default {
 
+  beforeMount(){
+    if(!this.$store.state.isAuthenticated){
+      this.$router.push({path: '/forbidden'});
+    }
+    
+    console.log(this.$store.state.isAuthenticated);
+  },
   data(){
     return{
       searchKey: '',
@@ -71,8 +78,8 @@ table, th, td {
   border-collapse: collapse;
   padding: 0.5rem;
 }
-table{
-  margin: 1rem;
+.center-table {
+  margin: auto; /* Center the table horizontally */
 }
 
 tr.item{
@@ -86,4 +93,3 @@ button{
   margin: 1rem;
 }
 </style>
-  
