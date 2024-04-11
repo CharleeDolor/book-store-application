@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h3><b>Welcome back, user!</b></h3>
-    <button @click="logout" class="logout-btn">Logout</button>
+    <h1><b>Welcome back, user!</b></h1>
     <BookList></BookList>
   </div>
   <div>
@@ -15,17 +14,12 @@ export default {
   components:{
     BookList
   },
-
-  methods: {
-    logout() {
-      this.$store.commit('updateAuthenticationStatus', false);
-      this.isAuthenticated = false;
-
-      alert("logged out");
-      //push base path to router
-      this.$router.push({path: '/'});
-    }
-  }
-
 }
 </script>
+
+<style>
+
+h1{
+  margin: 2rem;
+}
+</style>

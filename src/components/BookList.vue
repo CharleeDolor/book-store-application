@@ -1,6 +1,10 @@
 <template>
   <div>
-    <button @click="gotoMyCart"> My cart</button>
+    <div>
+      <button @click="logout" class="logout-btn">Logout</button>
+      <button @click="gotoMyCart"> My cart</button>
+    </div>
+    
 
     <div class="control-panel">
       <input type="text" v-model="searchKey"><button @click="searchBook(searchKey)">Search</button>
@@ -14,10 +18,10 @@
         <th>Available Copies</th>
       </tr>
       <tr v-for="book in searchedItems" :key="book.name" class="item" @click="addToCart(book)">
-        <td>{{ book.name }}</td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.price }}</td>
-        <td>{{ book.stockQuantity }}</td>
+        <td class="name">{{ book.name }}</td>
+        <td class="author">{{ book.author }}</td>
+        <td class="price">{{ book.price }}</td>
+        <td class="quantity">{{ book.stockQuantity }}</td>
       </tr>
     </table>
   </div>
@@ -66,6 +70,15 @@ export default {
         // load all available books getBooks computed property
         this.searchedItems = this.getBooks;
       }
+    },
+
+    logout() {
+      this.$store.commit('updateAuthenticationStatus', false);
+      this.isAuthenticated = false;
+
+      alert("logged out");
+      //push base path to router
+      this.$router.push({path: '/'});
     }
   }
 }
@@ -89,7 +102,20 @@ tr.item{
 tr.item:hover{
   background-color: bisque;
 }
-button{
-  margin: 1rem;
+.name,
+.author{
+  text-align: center;
+}
+
+.price,
+.quantity{
+  text-align: right;
+  width: 8rem;
+}
+
+.logout-btn{
+  position: fixed;
+  top: 10px;
+  right: 10px;
 }
 </style>
